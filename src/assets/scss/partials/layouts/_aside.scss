@@ -1,0 +1,19 @@
+.aside {
+  height: 100vh;
+  background: $secondary;
+  color: lighten($secondary, 40);
+  padding: $size-3;
+
+  h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    padding-bottom: $size-3;
+    color: $white;
+  }
+
+  > div:not(:last-child) {
+    border-bottom: 1px solid lighten($secondary, 10);
+    padding-bottom: $size-3;
+    margin-bottom: $size-3;
+  }
+}

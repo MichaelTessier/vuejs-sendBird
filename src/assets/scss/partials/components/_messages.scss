@@ -1,0 +1,8 @@
+.messages {
+  height: calc(100% - 100px); // 100px = height of message-sender   
+  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: 80px;
+  transition: width 600ms ease;
+  width: auto;
+}

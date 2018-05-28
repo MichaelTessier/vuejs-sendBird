@@ -1,0 +1,20 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, body .input, body textarea{
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: $text-color;
+}
+
+li{
+  list-style: none;
+}
+
+.app {
+  background: $primary-light;
+  height: 100vh;
+  min-width: 1200px;
+  overflow: hidden;
+}

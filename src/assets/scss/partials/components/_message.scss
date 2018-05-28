@@ -1,0 +1,54 @@
+.message {
+  background: transparent;
+  opacity: 1;
+  $radius : 0px;
+  $arrow-width: 5px;
+
+  & .message-infos {
+    font-size: 0.6em;
+    margin: $size-5 0 0 !important;
+    padding-top: $size-6;
+    border-top: 1px solid lighten($text-color, 42); 
+  }
+
+  & .message-text {
+
+    background: $white;
+    margin-right: $size-3;
+    box-shadow: 0px 6px 20px rgba($black, 0.05);
+    padding: $size-4;
+    margin-top: $size-3;
+    position: relative;
+
+    &::before{
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: -$arrow-width;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 $arrow-width $arrow-width*5 0;
+      border-color: transparent $white transparent transparent;
+    }
+
+  }
+
+  &.is-user{
+    flex-direction: row-reverse;
+
+    & .message-infos {
+      text-align: right;
+    }
+
+    & .message-text {
+      &::before{
+        left: auto;
+        right: -$arrow-width;
+        border-width:$arrow-width*5 $arrow-width 0 0;
+        border-color: $white transparent transparent transparent;
+      }
+    }
+  }
+}

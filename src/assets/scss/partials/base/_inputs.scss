@@ -1,0 +1,16 @@
+.input{
+  border-color: lighten($primary-medium, 5);
+  box-shadow: none !important;
+
+  &:hover{
+    border-color: $primary-medium;
+  }
+
+  &:focus{
+    border-color: $primary;
+  }
+
+  @include placeholder {
+    color:lighten($text-color, 30);
+  }
+}
