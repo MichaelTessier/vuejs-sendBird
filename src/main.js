@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// TODO : not use globally, easier in devs
+// TODO: not use globally, easier in devs
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 // globally (in your main .js file)

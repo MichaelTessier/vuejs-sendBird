@@ -31,7 +31,7 @@ import sendBird from '@/services/SendBird.js'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'app',
+  name: 'App',
 
   components: {
     Login,
@@ -48,9 +48,16 @@ export default {
     ])
   },
 
+  created () {
+
+    window.onbeforeunload = function() {
+      // TODO: dynamic channel
+      sendBird.exitChannel('vuejs')
+    }
+  }
+
 }
 </script>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">

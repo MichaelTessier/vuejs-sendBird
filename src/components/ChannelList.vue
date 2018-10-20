@@ -1,10 +1,10 @@
 <template>
-  <div class="channel-list" v-if="channels">
-    <h2>{{title}}</h2>
+  <div v-if="channels" class="channel-list">
+    <h2>{{ title }}</h2>
     <ul>
-      <channel-list-item 
-        v-for="(channel, index) in channels" 
-        :key="index" 
+      <channel-list-item
+        v-for="(channel, index) in channels"
+        :key="index"
         :channel="channel"/>
     </ul>
   </div>
@@ -19,14 +19,14 @@ import { mapState } from 'vuex'
 export default {
   name: 'ChannelList',
 
+  components: {
+    ChannelListItem
+  },
+
   data() {
     return {
       title: 'Rooms'
     }
-  },
-
-  components: {
-    ChannelListItem
   },
 
   computed: {
@@ -35,18 +35,20 @@ export default {
       channels: 'channels',
       activeChannel: 'channel'
     })
-    
+
   },
 
   created () {
-    sendBird.getChannelList((channels, error) => {
-      if (error) {
-        console.error(error)
-        return
-      }
 
-      this.$store.commit('SET_CHANNELS', channels)
-    })
+    sendBird
+      .getChannelList()
+      .then((channels) => {
+        this.$store.commit('SET_CHANNELS', channels)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+
   }
 }
 </script>

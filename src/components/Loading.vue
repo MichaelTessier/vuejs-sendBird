@@ -1,19 +1,21 @@
 <template>
-  <div class="loading" :class="{'is-active': isActive}">
+  <div :class="{'is-active': isActive}" class="loading">
     <div class="icon">
-      <icon name="sync" spin></icon>
+      <icon name="sync" spin/>
     </div>
   </div>
 </template>
 
 <script>
 
-
 export default {
   name: 'Loading',
 
   props: {
-    isActive: Boolean
+    isActive: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data () {
@@ -23,8 +25,7 @@ export default {
 
   mounted() {
 
-  },
+  }
 
 }
 </script>
-

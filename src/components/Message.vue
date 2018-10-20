@@ -1,15 +1,17 @@
 <template>
-  <li class="message columns is-gapless" :class="{ 'is-reverse is-user': isUser }">
+  <li :class="{ 'is-reverse is-user': isUser }" class="message columns is-gapless">
     <div class="column is-1">
       <user-thumbnail :image-url="message._sender.profileUrl"/>
     </div>
     <div class="column is-10">
       <div class="message-text">
         {{ message.message }}
+
         <p class="message-infos">
-          <span class="message-name" v-if="!isUser">{{ message._sender.userId }}</span>
-          <span class="message-date">{{date}}</span>
+          <span v-if="!isUser" class="message-name">{{ message._sender.userId }}</span>
+          <span class="message-date">{{ date }}</span>
         </p>
+
       </div>
     </div>
   </li>
@@ -19,18 +21,21 @@
 
 import UserThumbnail from '@/components/UserThumbnail'
 import moment from 'moment'
-import sendBird from '@/services/SendBird.js'
+// import sendBird from '@/services/SendBird.js'
 import { mapState } from 'vuex'
 
 export default {
   name: 'Message',
 
-  props: {
-    message: Object
-  },
-
   components: {
     UserThumbnail
+  },
+
+  props: {
+    message: {
+      type: Object,
+      default: null
+    }
   },
 
   computed: {

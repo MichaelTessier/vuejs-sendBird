@@ -12,13 +12,15 @@ import UserThumbnail from '@/components/UserThumbnail'
 export default {
   name: 'Message',
 
-  props: {
-    user: Object
-  },
-
   components: {
     UserThumbnail
+  },
+
+  props: {
+    user: {
+      type: Object,
+      default: null
+    }
   }
 }
 </script>
-

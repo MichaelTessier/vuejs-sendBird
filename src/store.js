@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// TODO : introduce vuex-persistedstate
+// TODO: introduce vuex-persistedstate
 // import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex)
@@ -8,14 +8,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
   state: {
-    locale: 'fr', // TODO: get locale
+    locale: 'fr',
     user: null,
     messages: [],
     channel: null,
     channels: null,
     channelUsers: []
   },
-  
+
   // plugins: [createPersistedState()],
 
   mutations: {
@@ -38,23 +38,28 @@ export default new Vuex.Store({
 
     SET_MESSAGES: (state, messages) => {
       state.messages = messages
-    },
+    }
 
   },
 
   actions: {
 
-    addMessage: ({commit, state}, message) => {
+    addMessage: ({ commit, state }, message) => {
       commit('SET_MESSAGES', state.messages.concat(message))
     },
-    
-    addMessages: ({commit, state}, messages) => {
+
+    addMessages: ({ commit, state }, messages) => {
       commit('SET_MESSAGES', messages.concat(state.messages))
     },
 
-    addChannelUser: ({commit, state}, user) => {
+    addChannelUser: ({ commit, state }, user) => {
       commit('SET_CHANNEL_USERS', state.channelUsers.concat(user))
     },
+
+    removeChannelUser: ({ commit, state }, user) => {
+      commit('SET_CHANNEL_USERS', state.channelUsers.filter(it => it.userId !== user.userId))
+    }
+
   },
 
   getters: {
@@ -62,8 +67,7 @@ export default new Vuex.Store({
     earliestMessage(state) {
       return state.messages[0]
     }
-    
-  }
 
+  }
 
 })

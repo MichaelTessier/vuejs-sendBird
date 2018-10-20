@@ -1,6 +1,6 @@
 <template>
   <div class="user-thumbnail">
-    <img :src="imageUrl">      
+    <img :src="imageUrl">
   </div>
 </template>
 
@@ -10,9 +10,11 @@ export default {
   name: 'UserThumbnail',
 
   props: {
-    imageUrl: String
-  },
+    imageUrl: {
+      type: String,
+      default: null
+    }
+  }
 
 }
 </script>
-

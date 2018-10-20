@@ -3,12 +3,12 @@
     <div class="columns is-gapless is-centered">
 
       <div class="column">
-        <textarea placeholder="Tapez votre message" v-model="message"></textarea>
+        <textarea v-model="message" placeholder="Tapez votre message"/>
       </div>
 
       <div class="column is-1 text">
         <div @click="send(message)">
-          <icon name="paper-plane"></icon>
+          <icon name="paper-plane"/>
         </div>
       </div>
 
@@ -40,17 +40,19 @@ export default {
 
   methods: {
     send(message) {
-      
-      if (!message) return 
 
-      sendBird.sendMessage(this.channel, message, (message, error) => {
-        if (error) {
+      if (!message) return
+
+      sendBird
+        .sendMessage(this.channel, message)
+        .then((message) => {
+          this.$store.dispatch('addMessage', message)
+          this.message = ''
+        })
+        .catch((error) => {
           console.error(error)
-          return
-        }
-        this.$store.dispatch('addMessage', message)
-        this.message = ''
-      })
+        })
+
     }
   }
 

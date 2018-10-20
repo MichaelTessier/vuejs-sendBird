@@ -1,10 +1,10 @@
 <template>
   <div class="channel-users">
-    <h2>{{channel.name}}</h2>
+    <h2>{{ channel.name }}</h2>
     <ul>
-      <channel-user 
-        v-for="(user, index) in channelUsers" 
-        :key="index" 
+      <channel-user
+        v-for="(user, index) in channelUsers"
+        :key="index"
         :user="user"/>
     </ul>
   </div>
@@ -29,26 +29,28 @@ export default {
       'channel',
       'channelUsers'
     ])
-    
+
   },
 
   mounted () {
-    sendBird.getChannelUsers(this.channel, (participantList, error) => {
-      if (error) {
+
+    sendBird
+      .getChannelUsers(this.channel)
+      .then((participantList) => {
+        this.$store.commit('SET_CHANNEL_USERS', participantList)
+      })
+      .catch((error) => {
         console.error(error)
-        return
-      }
-
-      this.$store.commit('SET_CHANNEL_USERS', participantList)
-
-    })
+      })
 
     sendBird.onUserEntered(this.channel, (channel, user) => {
-
       this.$store.dispatch('addChannelUser', user)
-      
     })
+
+    sendBird.onUserExited(this.channel, (channel, user) => {
+      this.$store.dispatch('removeChannelUser', user)
+    })
+
   }
 }
 </script>
-

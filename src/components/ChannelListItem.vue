@@ -13,8 +13,11 @@ export default {
   name: 'Message',
 
   props: {
-    channel: Object
-  },
+    channel: {
+      type: Object,
+      default: null
+    }
+  }
 
 }
 </script>

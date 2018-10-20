@@ -20,30 +20,24 @@ import ChannelUsers from '@/components/ChannelUsers'
 export default {
   name: 'Channel',
 
-  data () {
-    return {
-    }
-  },
-
   components: {
     Messages,
     MessageSender,
     ChannelUsers
   },
 
-  methods: {
-    
-  },
-
   created () {
-    // TODO: dynamic channel
-    sendBird.getChannel('vuejs', (channel, error) => {
-      if (error) {
+
+    sendBird
+      .getChannel('vuejs')
+      .then((channel) => {
+        this.$store.commit('SET_CHANNEL', channel)
+      })
+      .catch((error) => {
         console.error(error)
-        return
-      }
-      this.$store.commit('SET_CHANNEL', channel)
-    })
+      })
+
   }
+
 }
 </script>

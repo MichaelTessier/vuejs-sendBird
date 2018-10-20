@@ -1,83 +1,111 @@
-const SendBird = require('sendbird');
+const SendBird = require('sendbird')
 const sendBird = new SendBird({
   appId: 'F17D062D-F23B-4925-AC2B-616C194791CE'
 })
-var ChannelHandler = new sendBird.ChannelHandler();
+const ChannelHandler = new sendBird.ChannelHandler()
 
 export default {
 
-  login(username, cb) {
+  login (username) {
 
-    sendBird.connect(username, (user, error) => {
-      cb(user, error)
-    })
-
-  },
-
-  getChannel(channelUrl, cb) {
-
-    sendBird.OpenChannel.getChannel(channelUrl, (channel, error) => {
-      if (error) {
-        cb(channel, error)
-        return
-      }
-
-      channel.enter((response, error) =>{
-        cb(channel, error)
+    return new Promise((resolve, reject) => {
+      return sendBird.connect(username, (user, error) => {
+        if (error) reject(error)
+        resolve(user)
       })
-
-    })
-  },
-
-  getChannelMessages(channel, messageNumber, cb) {
-
-    const messageListQuery = channel.createPreviousMessageListQuery();
-    messageNumber = messageNumber ? messageNumber : 10
-
-    messageListQuery.load(messageNumber, false, (messageList, error) => {
-      cb(messageList, error)
     })
 
   },
 
-  getPreviousMessages(channel, earliestMessageTimestamp, limit, cb) {
+  getChannel (channelUrl) {
 
-    var messageListQuery = channel.createMessageListQuery();
-
-    messageListQuery.prev(earliestMessageTimestamp, limit, false, function(messageList, error){
-        cb(messageList, error);
-    });
-  },
-
-  getChannelList(cb) {
-
-    const openChannelListQuery = sendBird.OpenChannel.createOpenChannelListQuery();
-
-    openChannelListQuery.next((channels, error) => {
-        cb(channels, error)
-    });
+    return new Promise((resolve, reject) => {
+      return sendBird.OpenChannel.getChannel(channelUrl, (channel, error) => {
+        if (error) reject(error)
+        channel.enter()
+        resolve(channel)
+      })
+    })
 
   },
 
-  getChannelUsers(channel, cb) {
+  exitChannel (channelUrl) {
 
-    var participantListQuery = channel.createParticipantListQuery();
+    return new Promise((resolve, reject) => {
+      return sendBird.OpenChannel.getChannel(channelUrl, (channel, error) => {
+        if (error) reject(error)
+        channel.exit()
+        resolve(channel)
+      })
+    })
 
-    participantListQuery.next((participantList, error) => {
-      cb(participantList, error)
-    });
   },
 
-  sendMessage(channel, message, cb) {
-    
-    channel.sendUserMessage(message,(message, error) => {
-      cb(message, error)
+  getChannelMessages (channel, messageNumber) {
+
+    const messageListQuery = channel.createPreviousMessageListQuery()
+    messageNumber = messageNumber || 10
+
+    return new Promise((resolve, reject) => {
+      return messageListQuery.load(messageNumber, false, (messageList, error) => {
+        if (error) reject(error)
+        resolve(messageList)
+      })
+    })
+  },
+
+  getPreviousMessages(channel, earliestMessageTimestamp, limit) {
+
+    const messageListQuery = channel.createMessageListQuery()
+
+    return new Promise((resolve, reject) => {
+      return messageListQuery.prev(earliestMessageTimestamp, limit, false, (messageList, error) => {
+        if (error) reject(error)
+        resolve(messageList)
+      })
+    })
+
+  },
+
+  getChannelList() {
+
+    const openChannelListQuery = sendBird.OpenChannel.createOpenChannelListQuery()
+
+    return new Promise((resolve, reject) => {
+      return openChannelListQuery.next((channels, error) => {
+        if (error) reject(error)
+        resolve(channels)
+      })
+    })
+
+  },
+
+  getChannelUsers(channel) {
+
+    const participantListQuery = channel.createParticipantListQuery()
+
+    return new Promise((resolve, reject) => {
+      return participantListQuery.next((participantList, error) => {
+        if (error) reject(error)
+        resolve(participantList)
+      })
+    })
+
+  },
+
+  sendMessage(channel, message) {
+
+    return new Promise((resolve, reject) => {
+      return channel.sendUserMessage(message, (message, error) => {
+        if (error) reject(error)
+        resolve(message)
+      })
     })
 
   },
 
   onMessageReceived(channel, cb) {
-    
+
     ChannelHandler.onMessageReceived = (channel, message) => {
       cb(channel, message)
     }
@@ -87,9 +115,21 @@ export default {
   },
 
   onUserEntered(channel, cb) {
-    
-    ChannelHandler.onUserEntered = (channel, message) => {
-      cb(channel, message)
+
+    ChannelHandler.onUserEntered = (channel, user) => {
+      console.log('onUserEntered', channel, user)
+      cb(channel, user)
+    }
+
+    sendBird.addChannelHandler(channel, ChannelHandler)
+
+  },
+
+  onUserExited(channel, cb) {
+
+    ChannelHandler.onUserExited = (channel, user) => {
+      console.log('onUserExited', channel, user)
+      cb(channel, user)
     }
 
     sendBird.addChannelHandler(channel, ChannelHandler)
@@ -97,5 +137,3 @@ export default {
   }
 
 }
-
-

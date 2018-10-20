@@ -2,9 +2,9 @@
   <div class="messages">
     <loading :is-active="loadingIsActive"/>
     <ul ref="messagesList">
-      <message 
-        v-for="(message, index) in messages" 
-        :key="index" 
+      <message
+        v-for="(message, index) in messages"
+        :key="index"
         :message="message"/>
     </ul>
   </div>
@@ -51,91 +51,79 @@ export default {
 
   },
 
-  methods: {
-
-    scrollToBottom() {
-
-      this.$el.scrollTop = this.$refs.messagesList.offsetHeight
-
-    },
-
-    handleScroll() {
-      if (this.$el.scrollTop === 0 && !this.allMessagesIsLoaded) {
-        const oldHeight = this.$refs.messagesList.offsetHeight
-        
-        this.loadingIsActive = true
-
-        sendBird.getPreviousMessages(this.channel, this.earliestMessage.createdAt, 10, async (messageList, error) => {
-          if (error) {
-            console.error(error)
-            return
-          }
-          console.log(messageList);
-          if (messageList.length === 0) {
-            this.loadingIsActive = false
-            this.allMessagesIsLoaded = true
-            return
-          }
-
-          await this.$store.dispatch('addMessages', messageList)
-
-          this.$el.scrollTop = this.$refs.messagesList.offsetHeight - oldHeight 
-          this.loadingIsActive = false
-        })
-      }
-    }
-  },
-
   watch: {
     messages: {
       handler: function(newValue) {
         if (newValue && this.$el.offsetHeight + this.$el.scrollTop === this.$el.scrollHeight) {
-          
+
           this.$nextTick(() => {
-              this.scrollToBottom()
+            this.scrollToBottom()
           })
-        
+
         }
       },
       deep: true
     }
   },
 
-  mounted() {
+  mounted () {
 
-    sendBird.getChannelMessages(this.channel, 10, async (messageList, error) => {
-      if (error) {
+    sendBird
+      .getChannelMessages(this.channel, 10)
+      .then((messageList) => {
+        this.$store.commit('SET_MESSAGES', messageList)
+        this.scrollToBottom()
+      })
+      .catch((error) => {
         console.error(error)
-        return
-      }
-
-      await this.$store.commit('SET_MESSAGES', messageList)
-
-      this.scrollToBottom()
-
-    })
+      })
 
     sendBird.onMessageReceived(this.channel, (channel, message) => {
-
       this.$store.dispatch('addMessage', message)
-      
     })
 
     this.$nextTick(() => {
-
       this.$el.addEventListener('scroll', this.handleScroll)
-
     })
 
   },
 
-  destroyed() {
-
+  destroyed () {
     this.$el.removeEventListener('scroll', this.handleScroll)
+  },
 
+  methods: {
+
+    scrollToBottom () {
+      this.$el.scrollTop = this.$refs.messagesList.offsetHeight
+    },
+
+    handleScroll () {
+      if (this.$el.scrollTop === 0 && !this.allMessagesIsLoaded) {
+        const oldHeight = this.$refs.messagesList.offsetHeight
+
+        this.loadingIsActive = true
+
+        sendBird
+          .getPreviousMessages(this.channel, this.earliestMessage.createdAt, 10)
+          .then((messageList) => {
+            if (messageList.length === 0) {
+              this.loadingIsActive = false
+              this.allMessagesIsLoaded = true
+              return
+            }
+
+            this.$store.dispatch('addMessages', messageList)
+            this.$el.scrollTop = this.$refs.messagesList.offsetHeight - oldHeight
+            this.loadingIsActive = false
+
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      }
+    }
   }
-
 
 }
 </script>
-
