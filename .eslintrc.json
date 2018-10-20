@@ -1,0 +1,65 @@
+{
+	"plugins": [
+		"vue",
+		"es6"
+	],
+	"extends": [
+    "standard",
+    "plugin:vue/recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2017
+	},
+	"rules": {
+		"indent": [
+			"warn",
+			2,
+			{
+				"SwitchCase": 1,
+				"MemberExpression": 1
+			}
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"quotes": [
+			"warn",
+			"single"
+		],
+		"operator-linebreak": [
+			"warn",
+			"after",
+			{
+				"overrides": {
+					"?": "before",
+					":": "before",
+					"&&": "before",
+					"||": "before"
+				}
+			}
+		],
+		"brace-style": "off",
+		"camelcase": "warn",
+		"comma-dangle": "warn",
+		"comma-spacing": "warn",
+		"curly": "off",
+		"eol-last": "warn",
+		"handle-callback-err": "warn",
+		"keyword-spacing": "warn",
+		"new-cap": "warn",
+		"no-extra-semi": "warn",
+		"no-multiple-empty-lines": "warn",
+		"no-new": "off",
+		"no-trailing-spaces": "warn",
+		"no-template-curly-in-string": "warn",
+		"no-unused-vars": "warn",
+		"no-unused-expressions": "off",
+		"standard/object-curly-even-spacing": "warn",
+		"padded-blocks": "off",
+		"space-before-function-paren": "off",
+		"space-in-parens": "warn",
+    "spaced-comment": "off",
+    "vue/max-attributes-per-line": "off"
+	}
+}
