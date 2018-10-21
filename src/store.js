@@ -66,6 +66,10 @@ export default new Vuex.Store({
 
     earliestMessage(state) {
       return state.messages[0]
+    },
+
+    isLogged(state) {
+      return state.user
     }
 
   }

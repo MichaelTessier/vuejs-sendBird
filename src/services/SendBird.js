@@ -117,7 +117,6 @@ export default {
   onUserEntered(channel, cb) {
 
     ChannelHandler.onUserEntered = (channel, user) => {
-      console.log('onUserEntered', channel, user)
       cb(channel, user)
     }
 
@@ -128,7 +127,6 @@ export default {
   onUserExited(channel, cb) {
 
     ChannelHandler.onUserExited = (channel, user) => {
-      console.log('onUserExited', channel, user)
       cb(channel, user)
     }
 
