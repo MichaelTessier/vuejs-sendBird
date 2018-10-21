@@ -20,7 +20,7 @@
     margin-top: $size-3;
     position: relative;
 
-    &::before{
+    &::before {
       content: "";
       display: inline-block;
       position: absolute;
@@ -35,7 +35,7 @@
 
   }
 
-  &.is-user{
+  &.is-user {
     flex-direction: row-reverse;
 
     & .message-infos {
@@ -49,6 +49,13 @@
         border-width:$arrow-width*5 $arrow-width 0 0;
         border-color: $white transparent transparent transparent;
       }
+    }
+  }
+
+  &:not(.is-reverse) {
+    .user-thumbnail {
+      float: right;
+      margin-right: $size-3;
     }
   }
 }

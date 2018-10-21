@@ -1,4 +1,4 @@
-.loading{
+.loading {
 
   $duration: 300ms;
   $easing: ease;
@@ -23,7 +23,7 @@
     height: 30px;
   }
 
-  &.is-active{
+  &.is-active {
     opacity: 1;
     transform: translateY(25%);
   }

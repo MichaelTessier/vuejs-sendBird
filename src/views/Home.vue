@@ -3,10 +3,9 @@
 
     <div class="columns is-gapless">
 
-      <div class="column is-3">
+      <div class="column is-2">
         <div class="aside">
-          <channel-users v-if="channel"/>
-          <!-- <channel-list/> -->
+          <channel-list/>
         </div>
       </div>
 
@@ -39,7 +38,7 @@ export default {
   computed: {
     ...mapState([
       'user',
-      'channel',
+      // 'channel',
       'channels'
     ])
   },

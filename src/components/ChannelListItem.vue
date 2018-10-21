@@ -1,13 +1,20 @@
 <template>
   <li class="channel-list-item">
-    <!-- <img :src="channel.coverUrl" alt=""> -->
+
+    <div
+      v-if="channel.coverUrl"
+      class="channel-list-item__thumb">
+
+      <img :src="channel.coverUrl" >
+
+    </div>
+
     <span>{{ channel.name }}</span>
+
   </li>
 </template>
 
 <script>
-
-import sendBird from '@/services/SendBird.js'
 
 export default {
   name: 'Message',

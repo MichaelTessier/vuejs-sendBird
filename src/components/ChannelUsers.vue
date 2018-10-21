@@ -1,12 +1,15 @@
 <template>
   <div class="channel-users">
+
     <h2>{{ channel.name }}</h2>
+
     <ul>
       <channel-user
         v-for="(user, index) in channelUsers"
         :key="index"
         :user="user"/>
     </ul>
+
   </div>
 </template>
 

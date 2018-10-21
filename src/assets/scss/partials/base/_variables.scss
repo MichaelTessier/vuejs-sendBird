@@ -1,7 +1,7 @@
 $primary: #27c5fe !default;
-$primary-light: lighten($primary, 40) !default;
-$primary-medium: lighten($primary, 30) !default;
-$secondary: #0e5267;
-$secondary-light: lighten($secondary, 40) !default;
-$secondary-medium: lighten($secondary, 10) !default;
+$primary-light: lighten($primary, 40);
+$primary-medium: lighten($primary, 30);
+$secondary: #35505a;
+$secondary-light: lighten($secondary, 60);
+$secondary-medium: lighten($secondary, 10);
 $text-color: #81939a;

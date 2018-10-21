@@ -1,6 +1,11 @@
 .channel-users {
-  & ul {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  padding: 0 $size-5;
+  border-bottom: 1px solid $secondary-light;
+
+  h2 {
+    color: $secondary;
   }
+
 }

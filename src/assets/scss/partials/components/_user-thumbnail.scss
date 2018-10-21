@@ -1,6 +1,19 @@
 .user-thumbnail {
-  & img{
-    width: 50px;
-    border-radius: 50%;
+  border: 2px solid $primary-light;
+  box-shadow: 0px 3px 3px $secondary-light;
+  overflow: hidden;
+  width: 50px;
+  border-radius: 50%;
+
+  & img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &.xs {
+    box-shadow: none;
+    border: none;
+    width: 25px;
   }
 }

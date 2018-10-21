@@ -1,9 +1,9 @@
 <template>
   <div class="channel">
 
-    <!-- <channel-users v-if="$store.state.channel"/> -->
+    <channel-users v-if="channel"/>
 
-    <messages v-if="$store.state.channel"/>
+    <messages v-if="channel"/>
 
     <message-sender/>
 
@@ -16,6 +16,7 @@ import sendBird from '@/services/SendBird.js'
 import Messages from '@/components/Messages'
 import MessageSender from '@/components/MessageSender'
 import ChannelUsers from '@/components/ChannelUsers'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Channel',
@@ -24,6 +25,12 @@ export default {
     Messages,
     MessageSender,
     ChannelUsers
+  },
+
+  computed: {
+    ...mapState([
+      'channel'
+    ])
   },
 
   created () {

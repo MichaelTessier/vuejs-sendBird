@@ -1,7 +1,13 @@
 <template>
   <li class="channel-user">
-    <user-thumbnail :image-url="user.profileUrl"/>
+
+    <user-thumbnail
+      v-if="user.profileUrl"
+      :image-url="user.profileUrl"
+      size="xs"/>
+
     <span>{{ user.userId }}</span>
+
   </li>
 </template>
 

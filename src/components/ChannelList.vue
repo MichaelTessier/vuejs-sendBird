@@ -1,12 +1,15 @@
 <template>
   <div v-if="channels" class="channel-list">
+
     <h2>{{ title }}</h2>
+
     <ul>
       <channel-list-item
         v-for="(channel, index) in channels"
         :key="index"
         :channel="channel"/>
     </ul>
+
   </div>
 </template>
 

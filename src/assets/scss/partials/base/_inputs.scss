@@ -1,12 +1,12 @@
-.input{
+.input {
   border-color: lighten($primary-medium, 5);
   box-shadow: none !important;
 
-  &:hover{
+  &:hover {
     border-color: $primary-medium;
   }
 
-  &:focus{
+  &:focus {
     border-color: $primary;
   }
 

@@ -1,18 +1,23 @@
 <template>
   <div class="messages">
+
     <loading :is-active="loadingIsActive"/>
+
     <ul ref="messagesList">
       <message
         v-for="(message, index) in messages"
         :key="index"
         :message="message"/>
     </ul>
+
   </div>
 </template>
 
 <script>
 
-// TODO: add alert message when all messages is loaded
+// TODO:
+// add alert message when all messages is loaded
+// add day of the message if > current day like skype
 
 import Loading from '@/components/Loading.vue'
 import Message from '@/components/Message.vue'
@@ -99,8 +104,8 @@ export default {
     },
 
     handleScroll () {
+      const oldHeight = this.$refs.messagesList.offsetHeight
       if (this.$el.scrollTop === 0 && !this.allMessagesIsLoaded) {
-        const oldHeight = this.$refs.messagesList.offsetHeight
 
         this.loadingIsActive = true
 
@@ -114,8 +119,11 @@ export default {
             }
 
             this.$store.dispatch('addMessages', messageList)
-            this.$el.scrollTop = this.$refs.messagesList.offsetHeight - oldHeight
-            this.loadingIsActive = false
+
+            this.$nextTick(() => {
+              this.$el.scrollTop = this.$refs.messagesList.offsetHeight - oldHeight
+              this.loadingIsActive = false
+            })
 
           })
           .catch((error) => {

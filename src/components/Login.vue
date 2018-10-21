@@ -1,15 +1,18 @@
 <template>
   <div class="login">
     <div class="login-form">
+
       <input
         v-model="username"
         type="text"
         class="input is-medium"
         placeholder="Username">
+
       <!-- <input
         type="text"
         class="input"
         placeholder="Password"> -->
+
       <input
         type="submit"
         class="button is-primary is-full is-medium"

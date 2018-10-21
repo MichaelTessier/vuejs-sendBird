@@ -1,5 +1,24 @@
 .channel-list-item {
-  & img {
-    width: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: $size-7;
+
+  & .channel-list-item__thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: $secondary-medium;
+    margin-right: $size-7;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    & img {
+      width: 70%;
+      display: block;
+      margin: auto;
+    }
+
   }
 }
