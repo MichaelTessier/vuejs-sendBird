@@ -20,6 +20,7 @@
 
 import sendBird from '@/services/SendBird.js'
 import { mapState } from 'vuex'
+import striptags from 'striptags'
 
 export default {
   name: 'Message',
@@ -44,7 +45,7 @@ export default {
       if (!message) return
 
       sendBird
-        .sendMessage(this.channel, message)
+        .sendMessage(this.channel, striptags(message))
         .then((message) => {
           this.$store.dispatch('addMessage', message)
           this.message = ''
