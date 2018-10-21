@@ -2,14 +2,14 @@
   <li class="channel-list-item">
 
     <div
-      v-if="channel.coverUrl"
+      v-if="coverUrl"
       class="channel-list-item__thumb">
 
-      <img :src="channel.coverUrl" >
+      <img :src="coverUrl" >
 
     </div>
 
-    <span>{{ channel.name }}</span>
+    <span>{{ name }}</span>
 
   </li>
 </template>
@@ -17,12 +17,16 @@
 <script>
 
 export default {
-  name: 'Message',
+  name: 'ChannelListItem',
 
   props: {
-    channel: {
-      type: Object,
-      default: null
+    coverUrl: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
     }
   }
 

@@ -7,7 +7,8 @@
       <channel-list-item
         v-for="(channel, index) in channels"
         :key="index"
-        :channel="channel"/>
+        :cover-url="channel.coverUrl"
+        :name="channel.name"/>
     </ul>
 
   </div>

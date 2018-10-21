@@ -7,7 +7,8 @@
       <channel-user
         v-for="(user, index) in channelUsers"
         :key="index"
-        :user="user"/>
+        :profile-url="user.profileUrl"
+        :user-id="user.userId"/>
     </ul>
 
   </div>

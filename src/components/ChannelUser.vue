@@ -2,11 +2,11 @@
   <li class="channel-user">
 
     <user-thumbnail
-      v-if="user.profileUrl"
-      :image-url="user.profileUrl"
+      v-if="profileUrl"
+      :image-url="profileUrl"
       size="xs"/>
 
-    <span>{{ user.userId }}</span>
+    <span>{{ userId }}</span>
 
   </li>
 </template>
@@ -16,16 +16,20 @@
 import UserThumbnail from '@/components/UserThumbnail'
 
 export default {
-  name: 'Message',
+  name: 'ChannelUser',
 
   components: {
     UserThumbnail
   },
 
   props: {
-    user: {
-      type: Object,
-      default: null
+    profileUrl: {
+      type: String,
+      required: true
+    },
+    userId: {
+      type: String,
+      required: true
     }
   }
 }
