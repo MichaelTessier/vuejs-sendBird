@@ -36,25 +36,42 @@ export default {
 
   },
 
+  watch: {
+
+    channel: {
+      handler: function(newValue) {
+        this.init(newValue)
+      },
+      deep: true
+    }
+  },
+
   mounted () {
 
-    sendBird
-      .getChannelUsers(this.channel)
-      .then((participantList) => {
-        this.$store.commit('SET_CHANNEL_USERS', participantList)
+    this.init(this.channel)
+
+  },
+
+  methods: {
+    init (channel) {
+
+      sendBird
+        .getChannelUsers(channel)
+        .then((participantList) => {
+          this.$store.commit('SET_CHANNEL_USERS', participantList)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+
+      sendBird.onUserEntered(channel, (channel, user) => {
+        this.$store.dispatch('addChannelUser', user)
       })
-      .catch((error) => {
-        console.error(error)
+
+      sendBird.onUserExited(channel, (channel, user) => {
+        this.$store.dispatch('removeChannelUser', user)
       })
-
-    sendBird.onUserEntered(this.channel, (channel, user) => {
-      this.$store.dispatch('addChannelUser', user)
-    })
-
-    sendBird.onUserExited(this.channel, (channel, user) => {
-      this.$store.dispatch('removeChannelUser', user)
-    })
-
+    }
   }
 }
 </script>

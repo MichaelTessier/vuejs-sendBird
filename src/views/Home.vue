@@ -25,6 +25,8 @@ import ChannelList from '@/components/ChannelList.vue'
 import sendBird from '@/services/SendBird.js'
 import { mapState } from 'vuex'
 
+// TODO: user channel or empty channel
+
 export default {
   name: 'App',
 
@@ -43,9 +45,9 @@ export default {
   created () {
 
     window.onbeforeunload = function() {
-      // TODO: dynamic channel
       sendBird.exitChannel('vuejs')
     }
+
   }
 
 }

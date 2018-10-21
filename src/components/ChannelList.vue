@@ -8,7 +8,8 @@
         v-for="(channel, index) in channels"
         :key="index"
         :cover-url="channel.coverUrl"
-        :name="channel.name"/>
+        :name="channel.name"
+        :url="channel.url"/>
     </ul>
 
   </div>
@@ -35,10 +36,9 @@ export default {
 
   computed: {
 
-    ...mapState({
-      channels: 'channels',
-      activeChannel: 'channel'
-    })
+    ...mapState([
+      'channels'
+    ])
 
   },
 
@@ -54,5 +54,6 @@ export default {
       })
 
   }
+
 }
 </script>

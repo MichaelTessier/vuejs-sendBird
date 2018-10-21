@@ -33,17 +33,33 @@ export default {
     ])
   },
 
-  created () {
+  watch: {
+    channel: {
+      handler (newValue) {
+        this.init(newValue.url)
+      }
+    }
+  },
 
-    sendBird
-      .getChannel('vuejs')
-      .then((channel) => {
-        this.$store.commit('SET_CHANNEL', channel)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+  mounted () {
 
+    this.init('angular')
+
+  },
+
+  methods: {
+    init (url) {
+
+      sendBird
+        .getChannel(url)
+        .then((channel) => {
+          this.$store.commit('SET_CHANNEL', channel)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+
+    }
   }
 
 }

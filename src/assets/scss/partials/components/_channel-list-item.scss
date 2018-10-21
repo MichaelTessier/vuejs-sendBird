@@ -3,8 +3,10 @@
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: $size-7;
+  cursor: pointer;
+  transition: color 400ms ease;
 
-  & .channel-list-item__thumb {
+  &_thumb {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -20,5 +22,9 @@
       margin: auto;
     }
 
+  }
+
+  &:hover {
+    color: $primary;
   }
 }
