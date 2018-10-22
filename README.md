@@ -1,7 +1,5 @@
 # vuejs sendbird app 
 
-Demo [http://michael-tessier.fr/labo/vuejs-sendbird/](http://michael-tessier.fr/labo/vuejs-sendbird/).
-
 > A Vue.js project
 
 ## Build Setup
