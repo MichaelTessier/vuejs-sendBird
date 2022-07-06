@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "bulma": "^0.7.1",
-    "moment": "^2.22.1",
+    "moment": "^2.29.4",
     "sendbird": "3.0.63",
     "striptags": "^3.1.1",
     "vue": "^2.5.16",
